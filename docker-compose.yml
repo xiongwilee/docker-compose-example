@@ -17,5 +17,13 @@ services:
     build: ./gracejs
     ports:
       - 3000
+    links:
+      - mongodb
     volumes:
       - "./gracejs/gracejs:/gracejs"
+  mongodb:
+    image: mongo:latest
+    ports:
+      - 27017
+    volumes:
+      - "./mongodb/data/db:/data/db"
