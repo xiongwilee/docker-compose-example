@@ -1,1 +1,0 @@
-2018/07/24 06:53:17 [error] 5#5: *2 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), client: 218.107.211.71, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "i.wilee.me", referrer: "http://i.wilee.me/"
