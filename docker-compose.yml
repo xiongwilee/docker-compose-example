@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  nginx:
+    image: nginx:1.15.1
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./nginx/conf.d:/etc/nginx/conf.d"
+      - "./nginx/tmp:/var/tmp/nginx"
+      - "./nginx/log:/var/log/nginx"
+      - "./gracejs/gracejs:/gracejs"
+    links:
+      - gracejs
+  gracejs: 
+    build: ./gracejs
+    ports:
+      - 3000
+    volumes:
+      - "./gracejs/gracejs:/gracejs"
