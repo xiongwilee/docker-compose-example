@@ -1,3 +1,4 @@
 nginx/log/*
 nginx/tmp/*
+nginx/conf.d/ssl/*
 mongodb/data/db/*
