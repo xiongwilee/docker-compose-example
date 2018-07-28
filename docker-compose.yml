@@ -6,26 +6,40 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    depends_on:
+      - gracejs
     volumes:
       - "./nginx/conf.d:/etc/nginx/conf.d"
       - "./nginx/tmp:/var/tmp/nginx"
       - "./nginx/log:/var/log/nginx"
       - "./gracejs/gracejs:/gracejs"
-    links:
-      - gracejs
+    networks:
+      - app_net
   gracejs: 
     build: ./gracejs
     depends_on:
       - mongodb
     ports:
       - 3000
-    links:
-      - mongodb
     volumes:
       - "./gracejs/gracejs:/gracejs"
+    networks:
+      - app_net
   mongodb:
     image: mongo:latest
     ports:
       - 27017
     volumes:
       - "./mongodb/data/db:/data/db"
+    networks:
+       app_net:
+         # 固定子网ip，网段必须在子网络10.10.*.*
+         ipv4_address: 10.10.10.1
+networks:
+    # 配置docker network
+    app_net:
+      driver: bridge
+      ipam:
+        config:
+          # 子网络
+          - subnet: 10.10.0.0/16
